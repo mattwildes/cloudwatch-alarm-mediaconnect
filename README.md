@@ -1,6 +1,6 @@
 # CloudWatch Alarm for MediaConnect OutputDisconnections
 
-This CDK app creates an AWS CloudWatch Alarm that will trigger when the MediaConnect `OutputDisconnections` metrics is greater than 0. The CloudWatch Alarm is configured with an Action to send a message to an SNS Topic.  This CDK app creates the CloudWach Alarm and the SNS Topic.  
+This CDK app creates an Amazon CloudWatch Alarm that will trigger when the MediaConnect `OutputDisconnections` metrics is greater than 0. The CloudWatch Alarm is configured with an Action to send a message to an SNS Topic.  This CDK app creates the CloudWach Alarm and the SNS Topic.  
 
 Be sure to add the desired subscribers to the `emailAddresses` list in `lib\cloudwatch-alarm-mediaconnect-output-disconnections-stack.ts`.
 
