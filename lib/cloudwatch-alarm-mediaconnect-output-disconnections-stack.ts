@@ -10,14 +10,20 @@ export class CloudwatchAlarmMediaconnectOutputDisconnectionsStack extends Stack 
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const topic = new sns.Topic(this, 'Alarm topic', {
-      displayName: 'Alarm topic',
+    const topic = new sns.Topic(this, 'SNS topic', {
+      displayName: 'SNS topic',
       topicName: 'cloudwatch-alarm-mediaconnect-output-disconnections'
     });
-    //const emailAddress = new cdk.CfnParameter(this, 'wildesmj@amazon.com');
 
-    topic.addSubscription(new subscriptions.EmailSubscription('wildesmj@amazon.com'));
-    topic.addSubscription(new subscriptions.EmailSubscription('wildesmj+test@amazon.com'));
+    let emailAddresses = [
+      'wildesmj@amazon.com',
+      'wildesmj+test@amazon.com',
+      'wildesmj+test1@amazon.com',
+    ];
+
+    emailAddresses.forEach((address) => {
+      topic.addSubscription(new subscriptions.EmailSubscription(address));
+    });
 
     const metric = new cloudwatch.Metric({
       namespace: 'AWS/MediaConnect',
@@ -26,8 +32,7 @@ export class CloudwatchAlarmMediaconnectOutputDisconnectionsStack extends Stack 
       statistic: 'Sum',
     });
 
-    
-    const alarm = new cloudwatch.Alarm(this, 'cloudwatch-alarm-mediaconnect-output-disconnections', {
+    const alarm = new cloudwatch.Alarm(this, 'CloudWatch Alarm', {
       metric,
       threshold: 0,
       evaluationPeriods: 1,
@@ -35,8 +40,8 @@ export class CloudwatchAlarmMediaconnectOutputDisconnectionsStack extends Stack 
       alarmName: 'mediaconnect-output-disconnections',
       comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD,
     });
-    
+
     alarm.addAlarmAction(new cw_actions.SnsAction(topic));
-    
+
   }
 }
