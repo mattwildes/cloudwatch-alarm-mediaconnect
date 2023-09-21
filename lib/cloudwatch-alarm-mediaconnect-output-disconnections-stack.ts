@@ -16,9 +16,7 @@ export class CloudwatchAlarmMediaconnectOutputDisconnectionsStack extends Stack 
     });
 
     let emailAddresses = [
-      'wildesmj@amazon.com',
-      'wildesmj+test@amazon.com',
-      'wildesmj+test1@amazon.com',
+      'email@example.com',
     ];
 
     emailAddresses.forEach((address) => {
