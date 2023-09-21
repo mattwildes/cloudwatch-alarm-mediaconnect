@@ -1,7 +1,8 @@
-# Welcome to your CDK TypeScript project
+# CloudWatch Alarm for MediaConnect OutputDisconnections
 
-You should explore the contents of this project. It demonstrates a CDK app with an instance of a stack (`CloudwatchAlarmMediaconnectStack`)
-which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
+This CDK app creates an AWS CloudWatch Alarm that will trigger when the MediaConnect `OutputDisconnections` metrics is greater than 0. The CloudWatch Alarm is configured with an Action to send a message to an SNS Topic.  This CDK app creates the CloudWach Alarm and the SNS Topic.  
+
+Be sure to add the desired subscribers to the `emailAddresses` list in `lib\cloudwatch-alarm-mediaconnect-output-disconnections-stack.ts`.
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
